@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vendor: MyString
+  amount: 1.5
+  description: MyText
+  tag: MyText
+  expensedate: 2016-02-19
+  user_id: 
+  project_id: 
+  expensestatus_id: 
+  expensetype_id: 
+
+two:
+  vendor: MyString
+  amount: 1.5
+  description: MyText
+  tag: MyText
+  expensedate: 2016-02-19
+  user_id: 
+  project_id: 
+  expensestatus_id: 
+  expensetype_id: 

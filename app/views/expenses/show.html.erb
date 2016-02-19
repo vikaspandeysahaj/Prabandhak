@@ -1,0 +1,42 @@
+<p>
+  <strong>Vendor:</strong>
+  <%= @expense.vendor %>
+</p>
+
+<p>
+  <strong>amount:</strong>
+  <%= @expense.amount %>
+</p>
+
+<p>
+  <strong>description:</strong>
+  <%= @expense.description %>
+</p>
+
+<p>
+  <strong>tag:</strong>
+  <%= @expense.tag %>
+</p>
+
+<p>
+  <strong>user:</strong>
+  <%= @expense.user.name %>
+</p>
+
+<p>
+  <strong>project:</strong>
+  <%= @expense.project.title %>
+</p>
+
+<p>
+  <strong>expensestatus:</strong>
+  <%= @expense.expensestatus.title %>
+</p>
+
+<p>
+  <strong>expensetype:</strong>
+  <%= @expense.expensetype.title %>
+</p>
+  
+ 
+<%= link_to 'Back', expenses_path %>

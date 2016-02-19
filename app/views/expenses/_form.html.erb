@@ -1,0 +1,48 @@
+<%= form_for @expense do |f| %>
+ 
+  <p>
+    <%= f.label :vendor %><br>
+    <%= f.text_field :vendor %>
+  </p>
+  
+  <p>
+    <%= f.label :amount %><br>
+    <%= f.text_area :amount %>
+  </p>
+ 
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </p>
+
+  <p>
+    <%= f.label :tag %><br>
+    <%= f.text_area :tag %>
+  </p>
+
+   <p>
+    <%= f.label :user %><br>
+    <%= f.collection_select :user_id, User.all, :id, :name, :prompt => "Select a user" %>
+  
+  </p>
+
+  <p>
+    <%= f.label :project %><br />
+    <%= f.collection_select :project_id, Project.all, :id, :title, :prompt => "Select a project" %>
+  </p>
+
+  <p>
+    <%= f.label :expensestatus %><br>
+    <%= f.collection_select :expensestatus_id, Expensestatus.all, :id, :title, :prompt => "Select a status" %>
+  </p>
+
+  <p>
+    <%= f.label :expensetype %><br>
+    <%= f.collection_select :expensetype_id, Expensetype.all, :id, :title, :prompt => "Select a type" %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+ 
+<% end %>

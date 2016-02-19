@@ -1,0 +1,19 @@
+<h1>Expense Status Types</h1>
+<%= link_to 'New Expense Status Types', new_expensestatus_path %>
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Description</th>
+    <th colspan="3"></th>
+  </tr>
+ 
+  <% @expensestatuses.each do |expensestatus| %>
+    <tr>
+      <td><%= expensestatus.title %></td>
+      <td><%= expensestatus.description %></td>
+      <td><%= link_to 'Show', expensestatus_path(expensestatus) %></td>
+      <td><%= link_to 'Edit', edit_expensestatus_path(expensestatus) %></td>
+      <td><%= link_to 'Destroy', expensestatus_path(expensestatus),method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

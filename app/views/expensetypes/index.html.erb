@@ -1,0 +1,19 @@
+<h1>Expense Types</h1>
+<%= link_to 'New Expense Types', new_expensetype_path %>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th colspan="3"></th>
+  </tr>
+ 
+  <% @expensetypes.each do |expensetype| %>
+    <tr>
+      <td><%= expensetype.title %></td>
+      <td><%= expensetype.description %></td>
+      <td><%= link_to 'Show', expensetype_path(expensetype) %></td>
+      <td><%= link_to 'Edit', edit_expensetype_path(expensetype) %></td>
+      <td><%= link_to 'Destroy', expensetype_path(expensetype),method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,2 @@
+module ExpensestatusesHelper
+end
