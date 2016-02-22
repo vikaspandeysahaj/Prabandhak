@@ -1,0 +1,19 @@
+<h1>currency Types</h1>
+<%= link_to 'New currency', new_currency_path %>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th colspan="3"></th>
+  </tr>
+ 
+  <% @currencies.each do |currency| %>
+    <tr>
+      <td><%= currency.title %></td>
+      <td><%= currency.description %></td>
+      <td><%= link_to 'Show', currency_path(currency) %></td>
+      <td><%= link_to 'Edit', edit_currency_path(currency) %></td>
+      <td><%= link_to 'Destroy', currency_path(currency),method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

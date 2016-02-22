@@ -11,12 +11,14 @@ class Ability
       can :manage, Project
       can :manage, Expense
       can :manage, User
+      can :manage, Currency
     else
       can :read, Expensestatus
       can :read, Expensetype
       can :read, Project
       can :read, Expense
       can :read, User
+      can :read, Currency
     end
   end
 end

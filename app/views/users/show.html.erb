@@ -11,4 +11,8 @@
 	<p><%= link_to 'Expense Status Types', controller: 'expensestatuses' %></p>
 <% end %>
 
+<% if can? :manage, Currency %>
+	<p><%= link_to 'Currency', controller: 'currencies' %></p>
+<% end %>
+
 <p><%= link_to 'Expenses', controller: 'expenses' %></p>
