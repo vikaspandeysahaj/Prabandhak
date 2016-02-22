@@ -1,9 +1,14 @@
 <h1>User Home Page</h1>
+<% if can? :manage, Project %>
+  <p><%= link_to 'Projects', controller: 'projects' %></p>
+<% end %>
 
-<p><%= link_to 'Projects', controller: 'projects' %></p>
+<% if can? :manage, Expensetype %>
+	<p><%= link_to 'Expense Types', controller: 'expensetypes' %></p>
+<% end %>
 
-<p><%= link_to 'Expense Types', controller: 'expensetypes' %></p>
-
-<p><%= link_to 'Expense Status Types', controller: 'expensestatuses' %></p>
+<% if can? :manage, Expensestatus %>
+	<p><%= link_to 'Expense Status Types', controller: 'expensestatuses' %></p>
+<% end %>
 
 <p><%= link_to 'Expenses', controller: 'expenses' %></p>

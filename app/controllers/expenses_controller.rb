@@ -1,6 +1,10 @@
 class ExpensesController < ApplicationController
 	def index
-		@expenses = Expense.all;
+		if (current_user.is? :admin)
+			@expenses = Expense.all
+		else
+			@expenses = current_user.expenses
+		end
 	end
 
 	def new
@@ -13,6 +17,11 @@ class ExpensesController < ApplicationController
 
 	def create
 		@expense = Expense.new(expense_params)
+		if (current_user.is? :default)
+			@expense.user_id = current_user.id
+			@expense.expensestatus_id = Expensestatus.find(1).id
+		end
+
 		if @expense.save
 			redirect_to @expense
 		else
@@ -36,7 +45,11 @@ class ExpensesController < ApplicationController
   	end
 
  	def show
-    	@expense = Expense.find(params[:id])
+ 		if (current_user.is? :admin)
+    		@expense = Expense.find(params[:id])
+    	else
+			@expense = current_user.expenses.find(params[:id])
+		end
     end
     
 	private

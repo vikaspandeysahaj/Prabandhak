@@ -24,8 +24,18 @@
       <td><%= expense.expensestatus.title %></td>
       <td><%= expense.expensetype.title %></td>
       <td><%= link_to 'Show', expense_path(expense) %></td>
-      <td><%= link_to 'Edit', edit_expense_path(expense) %></td>
-      <td><%= link_to 'Destroy', expense_path(expense),method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+      <td>
+        <% if expense.expensestatus_id == 1%>
+          <%= link_to 'Edit', edit_expense_path(expense) %>
+        <%end%>
+      </td>
+      <td>
+         <% if expense.expensestatus_id == 1%>
+            <%= link_to 'Destroy', expense_path(expense),method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%end%>
+      </td>
+
     </tr>
   <% end %>
 </table>

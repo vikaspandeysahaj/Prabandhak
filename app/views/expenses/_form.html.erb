@@ -20,26 +20,36 @@
     <%= f.text_area :tag %>
   </p>
 
-   <p>
-    <%= f.label :user %><br>
-    <%= f.collection_select :user_id, User.all, :id, :name, :prompt => "Select a user" %>
-  
-  </p>
-
   <p>
     <%= f.label :project %><br />
     <%= f.collection_select :project_id, Project.all, :id, :title, :prompt => "Select a project" %>
   </p>
 
   <p>
-    <%= f.label :expensestatus %><br>
-    <%= f.collection_select :expensestatus_id, Expensestatus.all, :id, :title, :prompt => "Select a status" %>
-  </p>
-
-  <p>
     <%= f.label :expensetype %><br>
     <%= f.collection_select :expensetype_id, Expensetype.all, :id, :title, :prompt => "Select a type" %>
   </p>
+
+<% if current_user.is? :admin%>
+    <p>
+      <%= f.label :user %><br>
+      <%= f.collection_select :user_id, User.all, :id, :name, :prompt => "Select a user" %><br>
+
+      <%= f.label :expensestatus %><br>
+      <%= f.collection_select :expensestatus_id, Expensestatus.all, :id, :title, :prompt => "Select a status" %>
+    </p>
+<% end %>
+<% if current_user.is? :default%>
+    <p>
+      <%= f.label :user %><br>
+       <%= current_user.name %><br>
+
+      <%= f.label :expensestatus %><br>
+       <%= Expensestatus.find(1).title %>
+    </p>
+<% end %>
+
+  <br>
 
   <p>
     <%= f.submit %>
