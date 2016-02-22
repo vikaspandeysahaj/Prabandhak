@@ -3,10 +3,13 @@
 <table>
   <tr>
     <th>Vendor</th>
+    <th>Bill number</th>
+    <th>currency</th>
     <th>amount</th>
     <th>Description</th>
     <th>tag</th>
     <th>user</th>
+    <th>isBillable</th>
     <th>project</th>
     <th>expensestatus</th>
     <th>expensetype</th>
@@ -16,10 +19,13 @@
   <% @expenses.each do |expense| %>
     <tr>
       <td><%= expense.vendor %></td>
+      <td><%= expense.billnumber %></td>
       <td><%= expense.amount %></td>
+      <td><%= expense.currency.title %></td>
       <td><%= expense.description %></td>
       <td><%= expense.tag %></td>
       <td><%= expense.user.name %></td>
+      <td><%= expense.isbillable %></td>
       <td><%= expense.project.title %></td>
       <td><%= expense.expensestatus.title %></td>
       <td><%= expense.expensetype.title %></td>

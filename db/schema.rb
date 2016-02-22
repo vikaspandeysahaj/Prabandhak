@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222112246) do
+ActiveRecord::Schema.define(version: 20160222122024) do
 
   create_table "currencies", force: :cascade do |t|
     t.string   "title"
@@ -32,8 +32,12 @@ ActiveRecord::Schema.define(version: 20160222112246) do
     t.integer  "expensetype_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "currency_id"
+    t.string   "billnumber"
+    t.boolean  "isbillable"
   end
 
+  add_index "expenses", ["currency_id"], name: "index_expenses_on_currency_id"
   add_index "expenses", ["expensestatus_id"], name: "index_expenses_on_expensestatus_id"
   add_index "expenses", ["expensetype_id"], name: "index_expenses_on_expensetype_id"
   add_index "expenses", ["project_id"], name: "index_expenses_on_project_id"

@@ -3,4 +3,5 @@ class Expense < ActiveRecord::Base
   belongs_to :project
   belongs_to :expensestatus
   belongs_to :expensetype
+  belongs_to :currency
 end

@@ -4,6 +4,16 @@
 </p>
 
 <p>
+  <strong>billNumber:</strong>
+  <%= @expense.billnumber %>
+</p>
+
+<p>
+  <strong>currency:</strong>
+  <%= @expense.currency.title %>
+</p>
+
+<p>
   <strong>amount:</strong>
   <%= @expense.amount %>
 </p>
@@ -21,6 +31,11 @@
 <p>
   <strong>user:</strong>
   <%= @expense.user.name %>
+</p>
+
+<p>
+  <strong>isBillable:</strong>
+  <%= @expense.isbillable %>
 </p>
 
 <p>

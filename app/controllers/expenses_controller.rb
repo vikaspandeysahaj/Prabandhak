@@ -54,6 +54,7 @@ class ExpensesController < ApplicationController
     
 	private
   		def expense_params
-    		params.require(:expense).permit(:vendor, :amount,  :description, :tag, :expensedate, :user_id, :project_id, :expensestatus_id, :expensetype_id)
+    		params.require(:expense).permit(:vendor, :amount,  :description, :tag, :expensedate, 
+    			:user_id, :project_id, :expensestatus_id, :expensetype_id, :billnumber, :isbillable, :currency_id)
   		end
 end
