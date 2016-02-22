@@ -19,7 +19,7 @@ class ExpensesController < ApplicationController
 		@expense = Expense.new(expense_params)
 		if (current_user.is? :default)
 			@expense.user_id = current_user.id
-			@expense.expensestatus_id = Expensestatus.find(1).id
+			@expense.expensestatus_id = Expensestatus.first.id
 		end
 
 		if @expense.save
