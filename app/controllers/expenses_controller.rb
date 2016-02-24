@@ -1,9 +1,31 @@
 class ExpensesController < ApplicationController
 	def index
 		if (current_user.is? :admin)
-			@expenses = Expense.all
+			if(params[:expense]!= nil)
+				where = {}
+				where[:project_id] = params[:expense][:project_id] if params[:expense][:project_id].present?
+				where[:currency_id] = params[:expense][:currency_id] if params[:expense][:currency_id].present?
+				where[:expensetype_id] = params[:expense][:expensetype_id] if params[:expense][:expensetype_id].present?
+				where[:user_id] = params[:expense][:user_id] if params[:expense][:user_id].present?
+				where[:expensestatus_id] = params[:expense][:expensestatus_id] if params[:expense][:expensestatus_id].present?
+				if((params[:expense][:isbillable].present?)&&(params[:expense][:isbillable]!='-1'))
+					where[:isbillable] = params[:expense][:isbillable]
+				end
+				if((params[:expense][:fromdate].present?)&&(params[:expense][:todate].present?))
+					where[:expensedate] = params[:expense][:fromdate]..params[:expense][:todate]
+				end
+
+				@expenses = Expense.where(where).paginate(page: params[:page], per_page: 5)
+			else
+				@expenses = Expense.all.paginate(page: params[:page], per_page: 5)
+			end
 		else
-			@expenses = current_user.expenses
+			if(params[:expense]!= nil)
+					@expenses = current_user.expenses
+								.paginate(page: params[:page], per_page: 5)
+			else
+				@expenses = current_user.expenses.paginate(page: params[:page], per_page: 5)
+			end
 		end
 	end
 

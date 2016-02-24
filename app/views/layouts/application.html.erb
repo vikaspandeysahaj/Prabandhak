@@ -6,47 +6,70 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">Prabandhak</a>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Prabandhak</a>
+        </div>
 
-            <p class="navbar-text navbar-right">
-                <% if current_user %>
-                  Signed in as
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+              <% if can? :manage, Project %>
+                <li ><%= link_to 'Projects', controller: 'projects' %></li>
+              <% end %>
+
+              <% if can? :manage, Expensetype %>
+                <li ><%= link_to 'Expense Category', controller: 'expensetypes' %></li>
+              <% end %>
+
+              <% if can? :manage, Expensestatus %>
+               <li  ><%= link_to 'Workflow', controller: 'expensestatuses' %></li>
+              <% end %>
+
+              <% if can? :manage, Currency %>
+                <li><%= link_to 'Currency', controller: 'currencies' %></li>
+              <% end %>
+
+              <li><%= link_to 'Expenses', controller: 'expenses' %></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+              <li>
+                <%= link_to root_url do %>
+                  <%= image_tag current_user.profileurl, height: '40', width: '40'%>
+                <% end %>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <% if current_user.is? :admin%>
                     <strong>Admin : </strong>
                   <%end%>
-                  <strong><%= current_user.name %></strong>!
-                  <%= link_to "Sign out", signout_path, id: "sign_out" %>
-                <% else %>
-                  <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-                <% end %>
-            </p>
-          </div>
-        </div>
-         <ul class="nav nav-pills">
-          <% if can? :manage, Project %>
-            <li role="presentation"><%= link_to 'Projects', controller: 'projects' %></li>
-          <% end %>
+                  <strong><%= current_user.name %></strong>
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Dashboard</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><%= link_to "Sign out", signout_path, id: "sign_out" %></li>
+                </ul>
+              </li>
+            <% else %>
+              <li><%= link_to "Sign in", "/auth/google_oauth2", id: "sign_in" %></li>
+            <% end %> 
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
 
-          <% if can? :manage, Expensetype %>
-            <li role="presentation"><%= link_to 'Expense Category', controller: 'expensetypes' %></li>
-          <% end %>
-
-          <% if can? :manage, Expensestatus %>
-           <li role="presentation" ><%= link_to 'Workflow', controller: 'expensestatuses' %></li>
-          <% end %>
-
-          <% if can? :manage, Currency %>
-            <li role="presentation" ><%= link_to 'Currency', controller: 'currencies' %></li>
-          <% end %>
-
-          <li role="presentation"><%= link_to 'Expenses', controller: 'expenses' %></li>
-      </ul>
-      </nav>
-
-    
     <div>
       <%= yield %>
     </div>
