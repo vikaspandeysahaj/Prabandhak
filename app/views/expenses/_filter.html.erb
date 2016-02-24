@@ -1,0 +1,39 @@
+<%= form_tag("/expenses/", method: "get") do %>
+        
+        <div class="form-group">
+          <%= label_tag(:fromdate, "From") %>
+          <%= date_field(:expense, :fromdate, :class=> "form-control") %>
+        </div>
+        <div class="form-group">
+          <%= label_tag(:todate, "To") %>
+          <%= date_field(:expense, :todate, :class=> "form-control") %>
+       </div>
+        <div class="form-group">
+          <%= label_tag(:project_id, "Project") %>
+          <%= collection_select(:expense, :project_id, Project.all, :id, :title, {:prompt => "Select a project"}, {:class=> "form-control"})%>
+       </div>
+       <div class="form-group">
+          <%= label_tag(:currency_id, "Currency") %>
+          <%= collection_select(:expense, :currency_id, Currency.all, :id, :title, {:prompt => "Select a currency"}, {:class =>"form-control"})%>
+       </div>
+       <div class="form-group">
+          <%= label_tag(:expensetype_id, "Category") %>
+          <%= collection_select(:expense, :expensetype_id, Expensetype.all, :id, :title, {:prompt => "Select a category"}, {:class =>"form-control"})%>
+        </div>
+        <% if current_user.is? :admin%>
+          <div class="form-group">
+            <%= label_tag(:user_id, "User") %>
+            <%= collection_select(:expense, :user_id, User.all, :id, :name, {:prompt => "Select a user"}, {:class =>"form-control"})%>
+         </div>
+        <% end %>
+        <div class="form-group">
+          <%= label_tag(:expensestatus_id, "Status") %>
+          <%= collection_select(:expense, :expensestatus_id, Expensestatus.all, :id, :title, {:prompt => "Select a status"}, {:class =>"form-control"})%>
+        </div>
+        <div class="form-group">
+          <%= label_tag(:isbillable, "Project Type") %>
+          <%= select(:expense,:isbillable,options_for_select({ "All" => "-1", "Billable" => "t", "Non-Billable" => "f" }),{}, {:class => "form-control"}) %>
+        </div>
+        <%= submit_tag "Apply Filter", :class=> "btn btn-default"%>
+        <%= link_to 'Clear', expenses_path, :class => "btn btn-default" %>
+<% end %>
