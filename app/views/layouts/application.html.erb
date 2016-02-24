@@ -17,7 +17,6 @@
                   <% if current_user.is? :admin%>
                     <strong>Admin : </strong>
                   <%end%>
-
                   <strong><%= current_user.name %></strong>!
                   <%= link_to "Sign out", signout_path, id: "sign_out" %>
                 <% else %>
@@ -26,8 +25,28 @@
             </p>
           </div>
         </div>
+         <ul class="nav nav-pills">
+          <% if can? :manage, Project %>
+            <li role="presentation"><%= link_to 'Projects', controller: 'projects' %></li>
+          <% end %>
+
+          <% if can? :manage, Expensetype %>
+            <li role="presentation"><%= link_to 'Expense Category', controller: 'expensetypes' %></li>
+          <% end %>
+
+          <% if can? :manage, Expensestatus %>
+           <li role="presentation" ><%= link_to 'Workflow', controller: 'expensestatuses' %></li>
+          <% end %>
+
+          <% if can? :manage, Currency %>
+            <li role="presentation" ><%= link_to 'Currency', controller: 'currencies' %></li>
+          <% end %>
+
+          <li role="presentation"><%= link_to 'Expenses', controller: 'expenses' %></li>
+      </ul>
       </nav>
 
+    
     <div>
       <%= yield %>
     </div>
