@@ -15,9 +15,9 @@ class ExpensesController < ApplicationController
 					where[:expensedate] = params[:expense][:fromdate]..params[:expense][:todate]
 				end
 
-				@expenses = Expense.where(where).paginate(page: params[:page], per_page: 5)
+				@expenses = Expense.where(where).paginate(page: params[:page], per_page: 10)
 			else
-				@expenses = Expense.all.paginate(page: params[:page], per_page: 5)
+				@expenses = Expense.all.paginate(page: params[:page], per_page: 10)
 			end
 		else
 			if(params[:expense]!= nil)
@@ -33,9 +33,9 @@ class ExpensesController < ApplicationController
 					where[:expensedate] = params[:expense][:fromdate]..params[:expense][:todate]
 				end
 
-				@expenses = current_user.expenses.where(where).paginate(page: params[:page], per_page: 5)
+				@expenses = current_user.expenses.where(where).paginate(page: params[:page], per_page: 10)
 			else
-				@expenses = current_user.expenses.paginate(page: params[:page], per_page: 5)
+				@expenses = current_user.expenses.paginate(page: params[:page], per_page: 10)
 			end
 		end
 	end

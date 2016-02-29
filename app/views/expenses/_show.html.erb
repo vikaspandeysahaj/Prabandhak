@@ -1,57 +1,93 @@
-<p>
-  <strong>Vendor:</strong>
-  <%= @expense.vendor %>
-</p>
 
-<p>
-  <strong>billNumber:</strong>
-  <%= @expense.billnumber %>
-</p>
+<div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= label(:user, "Requester : ") %>
+        <%= @expense.user.name %>
+     </div>
+</div>
 
-<p>
-  <strong>currency:</strong>
-  <%= @expense.currency.title %>
-</p>
+<div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= label(:vendor, "Vendor : ") %>
+        <%= @expense.vendor %>
+     </div>
+</div>
 
-<p>
-  <strong>amount:</strong>
-  <%= @expense.amount %>
-</p>
+<div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= label(:expensedate, "Expense date : ") %>
+        <%= @expense.expensedate %>
+     </div>
+</div>
 
-<p>
-  <strong>description:</strong>
-  <%= @expense.description %>
-</p>
+<div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= label(:billnumber, "Bill Number : ") %>
+        <%= @expense.billnumber %>
+     </div>
+</div>
 
-<p>
-  <strong>tag:</strong>
-  <%= @expense.tag %>
-</p>
+<div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= label(:currency, "Currency : ") %>
+        <%= @expense.currency.title %>
+     </div>
+</div>
 
-<p>
-  <strong>user:</strong>
-  <%= @expense.user.name %>
-</p>
+<div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= label(:amount, "Amount : ") %>
+        <%= @expense.amount %>
+     </div>
+</div>
 
-<p>
-  <strong>isBillable:</strong>
-  <%= @expense.isbillable %>
-</p>
+<div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= label(:isbillable, "isBillable : ") %>
+        <%= @expense.isbillable %>
+     </div>
+</div>
 
-<p>
-  <strong>project:</strong>
-  <%= @expense.project.title %>
-</p>
+<div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= label(:project, "Project : ") %>
+        <%= @expense.project.title %>
+     </div>
+</div>
 
-<p>
-  <strong>expensestatus:</strong>
-  <%= @expense.expensestatus.title %>
-</p>
+<div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= label(:expensetype, "Expense Category : ") %>
+        <%= @expense.expensetype.title %>
+     </div>
+</div>
 
-<p>
-  <strong>expensetype:</strong>
-  <%= @expense.expensetype.title %>
-</p>
-  
+<div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= label(:description, "Description : ") %>
+        <%= @expense.description %>
+     </div>
+</div>
+
+<div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= label(:tag, "Tag : ") %>
+        <%= @expense.tag %>
+     </div>
+</div>
+
+<div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= label(:expensestatus, "Status : ") %>
+        <%= @expense.expensestatus.title %>
+     </div>
+</div>
+
+<div class = "row">
+    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+         <%= link_to 'Close', expenses_path,  :class => "btn btn-danger pull-right" %>
+     </div>
+</div>
+
+
  
-<%= link_to 'Back', expenses_path %>

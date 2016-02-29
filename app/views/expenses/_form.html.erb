@@ -94,8 +94,12 @@
 
   <% end %>
 
-   <div class="form-group">
-    <%= f.submit  @expense.new_record? ? "Create" : "Save", :class => "btn btn-primary" %>
+  <div class = "row">
+    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+        <%= f.submit  @expense.new_record? ? "Create" : "Save", :class => "btn btn-primary" %>
+        <%= link_to 'Close', expenses_path,  :class => "btn btn-danger" %>
+     </div>
   </div>
+
 
 <% end %>
