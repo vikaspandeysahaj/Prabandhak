@@ -13,7 +13,7 @@
   <div class="panel panel-default">
   <div class="panel-heading">Expenses</div>
   <div class="panel-body">
-    <%= link_to 'New Expense', new_expense_path, :class => "btn btn-primary" %>
+    <%= link_to 'New Expense', new_expense_path, remote: true, :class => "btn btn-primary" %>
   </div>
 
   <table class="table sortable">
@@ -31,12 +31,27 @@
       <th>Project</th>
       <th>Status</th>
       <th>Category</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
    
     <% @expenses.each do |expense| %>
       <tr>
-        <td><%= link_to '#', expense_path(expense) %><%= link_to expense.id, expense_path(expense) %></td>
+        <% if current_user.is? :admin%>
+          <td>
+            <%= link_to '#', edit_expense_path(expense), remote: true%><%= link_to expense.id, edit_expense_path(expense), remote: true %>
+          </td>
+        <%else%>
+          <% if expense.expensestatus.title == Expensestatus.first.title%>
+              <td>
+                <%= link_to '#', edit_expense_path(expense), remote: true%><%= link_to expense.id, edit_expense_path(expense), remote: true %>
+              </td>
+          <%else%>
+              <td>
+                <%= link_to '#', expense_path(expense), remote: true%><%= link_to expense.id, expense_path(expense), remote: true %>
+              </td>
+          <%end%>
+        <%end%>
+              
         <td><%= expense.vendor %></td>
         <td><%= expense.billnumber %></td>
         <td><%= expense.expensedate %></td>
@@ -49,11 +64,6 @@
         <td><%= expense.project.title %></td>
         <td><%= expense.expensestatus.title %></td>
         <td><%= expense.expensetype.title %></td>
-        <td>
-          <% if ((expense.expensestatus==Expensestatus.first)||(current_user.is? :admin))%>
-            <%= link_to 'Edit', edit_expense_path(expense) %>
-          <%end%>
-        </td>
         <td>
            <% if ((expense.expensestatus==Expensestatus.first)||(current_user.is? :admin))%>
               <%= link_to 'Delete', expense_path(expense),method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -70,7 +80,7 @@
 </div>
 </div>
 </div>
-
+ <%= render 'dialog' %>
   
 
 

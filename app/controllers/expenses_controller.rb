@@ -54,35 +54,36 @@ class ExpensesController < ApplicationController
 			@expense.user_id = current_user.id
 			@expense.expensestatus_id = Expensestatus.first.id
 		end
-
-		if @expense.save
-			redirect_to @expense
-		else
-			render 'new'
+		
+		respond_to do |format|
+			if @expense.save
+				format.json { head :no_content }
+	        	format.js
+			else
+				render 'new'
+			end
 		end
 	end
 
 	def update
 		@expense = Expense.find(params[:id])
-		if(@expense.update(expense_params))
-			redirect_to @expense
-		else
-			render 'edit'
+		respond_to do |format|
+			if(@expense.update(expense_params))
+				format.json { head :no_content }
+	        	format.js
+			else
+				render 'edit'
+			end
 		end
 	end
 
 	def destroy
     	@expense = Expense.find(params[:id])
     	@expense.destroy
-    	redirect_to expenses_path
   	end
 
  	def show
- 		if (current_user.is? :admin)
-    		@expense = Expense.find(params[:id])
-    	else
-			@expense = current_user.expenses.find(params[:id])
-		end
+ 		@expense = Expense.find(params[:id])
     end
     
 	private

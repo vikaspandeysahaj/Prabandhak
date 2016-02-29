@@ -1,78 +1,101 @@
 <%= form_for @expense do |f| %>
- 
-  <p>
-    <%= f.label :vendor %><br>
-    <%= f.text_field :vendor %>
-  </p>
+  <div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= f.label(:vendor, "Vendor") %>
+        <%= f.text_field :vendor, :class=> "form-control"%>
+     </div>
+     <div class=" form-group col-lg-6 col-md-6 col-sm-12">
+        <%= f.label(:expensedate, "Expense Date") %>
+        <%= f.date_field :expensedate, :class=> "form-control"%>
+     </div>
+  </div>
+
+  <div class = "row">
+    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+      <%= f.label(:billnumber, "Bill Number") %>
+      <%= f.text_field :billnumber, :class=> "form-control"%>
+     </div>
+  </div>
+
+  <div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+      <%= f.label(:currency, "Currency") %>
+      <%= f.collection_select :currency_id, Currency.all, :id, :title, {:prompt => "Select a currency"}, {:class =>"form-control"} %>
+     </div>
+     <div class=" form-group col-lg-6 col-md-6 col-sm-12">
+      <%= f.label(:amount, "Amount") %>
+      <%= f.text_field :amount, :class=> "form-control"%>
+     </div>
+  </div>
   
-  <p>
-    <%= f.label :billnumber %><br>
-    <%= f.text_field :billnumber %>
-  </p>
+  <div class = "row">
+    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+      <%= f.check_box :isbillable %>
+      <%= f.label(:isbillable, "isbillable") %>
+     </div>
+  </div>
 
-  <p>
-    <%= f.label :expensedate %><br>
-    <%= f.date_field :expensedate %>
-  </p>
+  <div class = "row">
+    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+       <%= f.label(:project, "Project") %>
+        <%= f.collection_select :project_id, Project.all, :id, :title, {:prompt => "Select Project"}, {:class =>"form-control"} %>
+     </div>
+  </div>
 
-  <p>
-    <%= f.label :amount %><br>
-    <%= f.text_area :amount %>
-  </p>
- 
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </p>
+  <div class = "row">
+    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+       <%= f.label(:expensetype, "Expense Category") %>
+      <%= f.collection_select :expensetype_id, Expensetype.all, :id, :title, {:prompt => "Select Expense Category"}, {:class =>"form-control"} %>
+     </div>
+  </div>
 
-  <p>
-    <%= f.label :tag %><br>
-    <%= f.text_area :tag %>
-  </p>
+  <div class = "row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <%= f.label(:description, "Description") %>
+        <%= f.text_area :description, :class=> "form-control"%>
+     </div>
+     <div class=" form-group col-lg-6 col-md-6 col-sm-12">
+      <%= f.label(:tag, "tag") %>
+      <%= f.text_area :tag, :class=> "form-control"%>
+     </div>
+  </div>
 
-  <p>
-    <%= f.label :isbillable %><br>
-    <%= f.text_area :isbillable %>
-  </p>
+  <% if current_user.is? :admin%>
 
-  <p>
-    <%= f.label :project %><br />
-    <%= f.collection_select :project_id, Project.all, :id, :title, :prompt => "Select a project" %>
-  </p>
+    <div class = "row">
+      <div class="form-group col-lg-12 col-md-12 col-sm-12">
+        <%= f.label(:user, "Requester") %>
+        <%= f.collection_select :user_id, User.all, :id, :name, {:prompt => "Select User"}, {:class =>"form-control"} %>
+      </div>
+    </div>
 
-  <p>
-    <%= f.label :currency %><br />
-    <%= f.collection_select :currency_id, Currency.all, :id, :title, :prompt => "Select a currency" %>
-  </p>
+    <div class = "row">
+      <div class="form-group col-lg-12 col-md-12 col-sm-12">
+         <%= f.label(:expensestatus, "Status") %>
+         <%= f.collection_select :expensestatus_id, Expensestatus.all, :id, :title, {:prompt => "Select Status"}, {:class =>"form-control"} %>
+        </div>
+    </div>
 
-  <p>
-    <%= f.label :expensetype %><br>
-    <%= f.collection_select :expensetype_id, Expensetype.all, :id, :title, :prompt => "Select a type" %>
-  </p>
+  <% end %>
+  <% if current_user.is? :default%>
+    <div class = "row">
+      <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <%= f.label(:user, "Requester:")%>
+            <%= current_user.name %>
+      </div>
+    </div>
 
-<% if current_user.is? :admin%>
-    <p>
-      <%= f.label :user %><br>
-      <%= f.collection_select :user_id, User.all, :id, :name, :prompt => "Select a user" %><br>
+    <div class = "row">
+      <div class="form-group col-lg-12 col-md-12 col-sm-12">
+          <%= f.label(:expensestatus, "Status:") %>
+          <%= Expensestatus.first.title %>
+      </div>
+    </div>
 
-      <%= f.label :expensestatus %><br>
-      <%= f.collection_select :expensestatus_id, Expensestatus.all, :id, :title, :prompt => "Select a status" %>
-    </p>
-<% end %>
-<% if current_user.is? :default%>
-    <p>
-      <%= f.label :user %><br>
-       <%= current_user.name %><br>
+  <% end %>
 
-      <%= f.label :expensestatus %><br>
-       <%= Expensestatus.first.title %>
-    </p>
-<% end %>
+   <div class="form-group">
+    <%= f.submit  @expense.new_record? ? "Create" : "Save", :class => "btn btn-primary" %>
+  </div>
 
-  <br>
-
-  <p>
-    <%= f.submit %>
-  </p>
- 
 <% end %>
